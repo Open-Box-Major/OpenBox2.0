@@ -67,5 +67,10 @@
         let pwd = document.querySelector("#password");
         pwd.type = pwd.type == "text" ? "password" : "text";
     }
+
+    document.addEventListener("submit", (e)=>{
+        e.preventDefault();
+        document.location.href = "main.html"
+    })
 </script>
 </html>
