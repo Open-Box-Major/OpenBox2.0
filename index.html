@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel = "stylesheet" href = "style.css">
+</head>
+<body>
+    <body>
+        <div class = "navbar">
+            <img src = "assets/logo.jpg">
+            <h1>Login</h1>
+            <div class = "menu-toggle">
+                <input type = "checkbox" id = "checkbox">
+                <div class = "menu-stick"></div>
+                <div class = "menu-stick"></div>
+                <div class = "menu-stick"></div>
+            </div>
+            <div class = "navbar-content">
+                <ul>
+                    <li>Home</li>
+                    <li>Creators</li>
+                    <li>Confession</li>
+                </ul>
+            </div>
+        </div>
+        <form action = "" method = "post">
+            <label for = "name">Name</label>
+            <input type = "text" name = "name">
+            <labe for = "password">Password</labe>
+            <input type = "password" name = "password" id = "password">
+            <div>
+                <input type = "checkbox" onclick = "showPassword()">
+                <label>Show</label>
+            </div>
+            <input type="submit" value = "Log in">
+        </form>
+
+        <p style = "width : fit-content; margin : auto;">or sign up with</p>
+        <div class = "other-options">
+            <div>
+                <img src = "https://cdn1.iconfinder.com/data/icons/google-s-logo/150/Google_Icons-09-512.png">
+                <p>Google</p>
+            </div>
+            <div>
+                <img src = "https://assets.stickpng.com/images/580b57fcd9996e24bc43c53e.png">
+                <p>Twitter</p>
+            </div>
+        </div>
+</body>
+<script>
+    let toggle = document.querySelector("#checkbox")
+    let navContent = document.querySelector(".navbar-content")
+    toggle.addEventListener("click", (e)=>{
+        console.log(toggle.checked)
+        if(toggle.checked)
+        {
+            navContent.style.transform = "translateX(0%)"
+        }else
+            navContent.style.transform = "translateX(100%)"
+
+    })
+
+    function showPassword()
+    {
+        let pwd = document.querySelector("#password");
+        pwd.type = pwd.type == "text" ? "password" : "text";
+    }
+</script>
+</html>

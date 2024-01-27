@@ -1,0 +1,147 @@
+*{
+    margin : 0;
+    padding : 0;
+}
+:root{
+    /*pallete */
+    --dark-purple : #5B0888;
+    --purple : #713ABE;
+    --bush : #9D76C1;
+    --aux : #E5CFF7;
+    --grey : #808080;
+}
+
+body{
+    background-color : var(--aux);
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow : hidden;
+}
+
+.navbar{
+    height: 10vh;
+
+    display : flex;
+    flex-direction : row;
+    align-items : center;
+    justify-content: flex-start;
+    background-color : var(--purple);
+    color : white;
+
+    /* padding : 0 1em; */
+    position: fixed;
+    width : 100%;
+}
+
+.navbar h1{
+    margin-left : 2vw;
+}
+.navbar img{
+    height: 80%;
+    border-radius : 50%;
+    margin-left: 2vw;
+}
+
+.menu-toggle{
+    height: 7vh;
+    width: 7vh;
+
+    display : flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+
+    position: relative;
+    margin-left : auto;
+    margin-right : 2vw; 
+}
+.menu-toggle input{
+    height: 100%;
+    width : 100%;
+    position: absolute;
+    opacity: 0;
+}
+.menu-stick{
+    display : flex;
+    background-color : white;
+    width : 100%;
+    height: 10%;
+    border-radius : 20px;
+
+    transition : transform 300ms ease-out 0ms;
+}
+
+.menu-toggle input:checked ~ .menu-stick:nth-last-child(2){
+    transform : scale(0);
+}
+.menu-toggle input:checked ~ .menu-stick:nth-last-child(1){
+    transform : translateY(-15px) rotateZ(45deg);
+}
+.menu-toggle input:checked ~ .menu-stick:nth-last-child(3){
+    transform : translateY(15px) rotatez(-45deg);
+}
+
+.navbar-content{
+    position : absolute;
+    display : flex;
+    flex-direction: column;
+
+    height: 100vh;
+    width : 50vw;
+    background-color: var(--purple);
+
+    top : 9.8vh;
+    right : 0%;
+    padding : 0 2em;
+    transform : translateX(100%);
+    transition: transform 300ms ease-out 0ms;
+}
+.navbar-content ul{
+    list-style : none;
+    font-size : 1.3em;
+    color : white;
+}
+
+/* ***************************write box********************************* */
+
+.write-box{
+    display : flex;
+    flex-direction : row;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 7vh;
+    width : 100%;
+    position : fixed;
+    bottom : 0;
+    background-color : var(--purple)
+}
+
+.write-box input{
+    width : 90%;
+    background-color: transparent;
+    border : none;
+    border-radius : 20px;
+    height: 70%;
+    width : 85%;
+    color : white;
+}
+.write-box input::placeholder{
+    color : white;
+}
+.write-box img{
+    aspect-ratio: 1/1;
+    width : 10%;
+}
+
+
+/* ************************message box*********************** */
+
+.msg-box{
+    display : flex;
+    flex-direction: column;
+    overflow-y : scroll;
+    width : 100%;
+    height: auto;
+    background-color: green;
+    margin-top : 10vh;
+}

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel = "stylesheet" href ="style.css">
+</head>
+<body>
+    <div class = "navbar">
+        <img src = "assets/logo.jpg">
+        <h1>Home</h1>
+        <div class = "menu-toggle">
+            <input type = "checkbox" id = "checkbox">
+            <div class = "menu-stick"></div>
+            <div class = "menu-stick"></div>
+            <div class = "menu-stick"></div>
+        </div>
+        <div class = "navbar-content">
+            <ul>
+                <li>Home</li>
+                <li>Creators</li>
+                <li>Confession</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class = "body-flex">
+        <div class = "option-card">
+            <div class = "box-1">
+                <img src = "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Juvenile_Ragdoll.jpg/800px-Juvenile_Ragdoll.jpg">
+            </div>
+            <div class = "box-2">
+                <h3>Confession Box</h3>
+                <p>This platform is a sanctuary for students seeking to unburden their hearts. An anonymous space where confessions find solace, offering a haven for candid expressions and shared experiences</p>
+            </div>
+        </div>
+        <div class = "option-card">
+            <div class = "box-1">
+                <img src = "https://images.unsplash.com/photo-1608848461950-0fe51dfc41cb?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8MXx8fGVufDB8fHx8fA%3D%3D">
+            </div>
+            <div class = "box-2">
+                <h3>About Creators</h3>
+                <p>Hey there! This page is all about the creators behind the scenes. Get the inside scoop on who's making the magic happen and what drives us to create this awesome space!                </p>
+            </div>
+        </div>
+        <div class = "option-card">
+            <div class = "box-1">
+                <img src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcST-Zn5E0-PxaFP-dKY2BHryHsZqkPyN4-7lPPo6k9cAw&s">
+            </div>
+            <div class = "box-2">
+                <h3>Chat Room</h3>
+                <p>This is still work in progress. We will launch this very very soon till then enjoy over other features.</p>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    let toggle = document.querySelector("#checkbox")
+    let navContent = document.querySelector(".navbar-content")
+    toggle.addEventListener("click", (e)=>{
+        console.log(toggle.checked)
+        if(toggle.checked)
+        {
+            navContent.style.transform = "translateX(0%)"
+        }else
+            navContent.style.transform = "translateX(100%)"
+
+    })
+</script>
+</html>
