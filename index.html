@@ -39,7 +39,7 @@
 
         <p style = "width : fit-content; margin : auto;">or sign up with</p>
         <div class = "other-options">
-            <div onclick="signin()">
+            <div>
                 <img  src = "https://cdn1.iconfinder.com/data/icons/google-s-logo/150/Google_Icons-09-512.png">
                 <p>Google</p>
             </div>
@@ -74,12 +74,12 @@
     })
 
 
-    function signin(){
-    let oauth = "https://accounts.google.com/o/oauth2/v2/auth";
+    // function signin(){
+    // let oauth = "https://accounts.google.com/o/oauth2/v2/auth";
 
-    let form = document.createElement('form')
-    form.setAttribute('mehtod','get')
-    form.setAttribute('action',oauth)
+    // let form = document.createElement('form')
+    // form.setAttribute('mehtod','get')
+    // form.setAttribute('action',oauth)
 
 
     // let params = {
@@ -98,8 +98,8 @@
     //     input.setAttribute('value',params[p])
     //     form.appendChild(input)
     // }
-    document.body.appendChild(form)
-    form.submit()
-}
+//     document.body.appendChild(form)
+//     form.submit()
+// }
 </script>
 </html>
