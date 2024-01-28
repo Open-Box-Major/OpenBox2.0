@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About us</title>
+    <link rel = "stylesheet" href = "style.css">
+    <script src = "main.js" defer></script>
+</head>
+<style>
+    .about-box{
+        display : flex;
+        flex-direction : column;
+        margin-top : 14vh;
+        justify-content: center;
+        align-items: center;
+        width : 100%;
+        gap : 1em;
+    }
+
+    ul{
+        color : white;
+        list-style: none;
+    }
+    .about-card img{
+        height: 12vh;
+        width: 12vh;
+        border-radius: 50%;
+        object-fit: cover;
+        border : solid 2px #5B0888;
+    }
+
+    .about-card{
+        display : flex;
+        flex-direction: row;
+        background-color : #713ABE;
+        border : solid 2px #5B0888;
+        border-radius : 20px;
+        padding : 1em 2em;
+        justify-content: space-between;
+        align-items: center;
+        width : 70%;
+        margin : auto;
+    }
+    .about-card:last-child{
+        flex-direction: row-reverse;
+    }
+
+    .img-wrapper{
+        /* border : solid 2px #5B0888; */
+        overflow: hidden;
+    }
+    .img-wrapper > img{
+        border-radius: 0;
+        object-position: 0 10%;
+        border-radius: 50%;
+    }
+</style>
+<body>
+    <div class = "navbar">
+        <img src = "../assets/about.jpg">
+        <h1>About us</h1>
+        <div class = "menu-toggle">
+            <input type = "checkbox" id = "checkbox">
+            <div class = "menu-stick"></div>
+            <div class = "menu-stick"></div>
+            <div class = "menu-stick"></div>
+        </div>
+        <div class = "navbar-content">
+            <ul>
+                <li>Main</li>
+                <li>Creators</li>
+                <li>Confession</li>
+            </ul>
+        </div>
+
+    </div>
+    <div class = "about-box">
+        <div class = "about-card">
+            <div class = "about-img">
+                <img src = "../assets/nithesh.jpeg">
+            </div>
+            <div class = "about info">
+                <ul>
+                    <li>Name : Nithesh Kumar</li>
+                    <li>USN : 1NH21IS104</li>
+                    <li>SEM/Section : 5 'B'</li>
+                </ul>
+            </div>
+        </div>
+        <div class = "about-card">
+            <div class = "about-img img-wrapper">
+                <img src = "../assets/aditya.jpeg">
+            </div>
+            <div class = "about info">
+                <ul>
+                    <li>Name : P Aditya</li>
+                    <li>USN : 1NH21IS105</li>
+                    <li>SEM/Section : 5 'B'</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
