@@ -228,16 +228,33 @@ body{
 
 /* ***********chatbox message styling************** */
 
-.container{
+/* all the styling is pasted in style of html only  */
+
+/* .container{
     background-color : var(--bush);
-    width : 90%;
+    width : 87%;
     margin : 1em auto;
     color : white;
     border-bottom-left-radius: 30px;
     border-bottom-right-radius: 30px;
+    position: relative;
+    border : none;
+    z-index : -1;
 }
 
+.container::before{
+    content: "";
+    display: block;
+    width : 5vh;
+    height : 5vh;
+    background-color : var(--bush);
+    position :absolute;
+    clip-path: polygon(0 0, 100% 100%, 100% 0); 
+    left : -15px;
+    top : 0;
+    z-index : -2;
+}
 
 #messageInput:focus{
     outline : none;
-}
+} */
