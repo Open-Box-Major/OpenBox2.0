@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel = "stylesheet" href = "style.css">
+  <script src = "main.js" defer></script>
+  <style>
+    body {
+      margin: 0 auto;
+      max-width: 800px;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+
+    #chatContainer {
+      overflow-y: auto;
+      height: 95%;
+    }
+
+    .container {
+      border: 2px solid #dedede;
+      background-color: #f1f1f1;
+      border-radius: 5px;
+      padding: 10px;
+      margin: 10px 0;
+    }
+
+    .darker {
+      border-color: #ccc;
+      background-color: #ddd;
+    }
+
+    .container::after {
+      content: "";
+      clear: both;
+      display: table;
+    }
+
+    .container img {
+      float: left;
+      max-width: 60px;
+      width: 100%;
+      margin-right: 20px;
+      border-radius: 50%;
+    }
+
+    .container img.right {
+      float: right;
+      margin-left: 20px;
+      margin-right:0;
+    }
+
+    .time-right {
+      float: right;
+      color: #aaa;
+    }
+
+    .time-left {
+      float: left;
+      color: #999;
+    }
+
+    #messageInput {
+        margin-bottom: 20px;
+      width: 100%;
+      padding: 10px;
+      box-sizing: border-box;
+    }
+  </style>
+</head>
+<body>
+
+    <div class = "navbar">
+        <img src = "../assets/logo.jpg">
+        <h1>ChatBox</h1>
+        <div class = "menu-toggle">
+            <input type = "checkbox" id = "checkbox">
+            <div class = "menu-stick"></div>
+            <div class = "menu-stick"></div>
+            <div class = "menu-stick"></div>
+        </div>
+        <div class = "navbar-content">
+            <ul>
+                <li>Main</li>
+                <li>Creators</li>
+                <li>Confession</li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="chatContainer"></div>
+
+    <div class = "write-box">
+        <input type="text" id="messageInput" placeholder="Type your message and press Enter">
+        <img src = "../assets/add.png" onclick = "handleUserInput()">
+    </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/7.14.1-0/firebase.js"></script>
+<script>
+    function addMessage(content,time, isRight,) {
+        const chatContainer = document.getElementById('chatContainer');
+    
+        const messageContainer = document.createElement('div');
+        messageContainer.className = isRight ? 'container darker' : 'container';
+    
+        const avatar = document.createElement('img');
+        avatar.src = isRight ? 'https://yt3.googleusercontent.com/Nvyt4BvBRR1K8Az3aoRZ3zWMPk66vl96IwDwsThyfS5KE7-RfrndziuiD7KJdxq9w_eQVukEDrk=s900-c-k-c0x00ffffff-no-rj' : 'https://yt3.googleusercontent.com/Nvyt4BvBRR1K8Az3aoRZ3zWMPk66vl96IwDwsThyfS5KE7-RfrndziuiD7KJdxq9w_eQVukEDrk=s900-c-k-c0x00ffffff-no-rj';
+        avatar.alt = 'Avatar';
+        avatar.className = isRight ? 'right' : '';
+    
+        const messageContent = document.createElement('p');
+        messageContent.textContent = content;
+    
+        const timestamp = document.createElement('span');
+        timestamp.className = isRight ? 'time-left' : 'time-right';
+        timestamp.textContent = time;
+        
+    
+        messageContainer.appendChild(avatar);
+        messageContainer.appendChild(messageContent);
+        messageContainer.appendChild(timestamp);
+    
+        chatContainer.appendChild(messageContainer);
+
+        // Scroll to the bottom of the chatContainer
+        chatContainer.scrollTop = chatContainer.scrollHeight;
+    }
+
+
+
+    //database init
+
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyAM_6WbvXX5gEU6geWFbGiPO40dgfnwNkU",
+        authDomain: "openbox-5e25b.firebaseapp.com",
+        databaseURL: "https://openbox-5e25b-default-rtdb.firebaseio.com",
+        projectId: "openbox-5e25b",
+        storageBucket: "openbox-5e25b.appspot.com",
+        messagingSenderId: "915721925737",
+        appId: "1:915721925737:web:90d4a1427c830ea19fdef8",
+        measurementId: "G-HEKESSPWNJ"
+    };
+
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+
+    // Set database variable
+    var database = firebase.database()
+
+
+
+
+
+
+    //update firebase
+
+    var contactFormDB = firebase.database().ref("contactForm");
+
+    const saveMessages = (name,time) => {
+    var newContactForm = contactFormDB.push();
+
+    newContactForm.set({
+        name: name,
+        time : time
+    });
+
+    };
+
+
+  function handleUserInput() {
+    const messageInput = document.getElementById('messageInput');
+    const messageContent = messageInput.value.trim();
+  
+    if (messageContent !== '') {
+    //   addMessage(messageContent, false);
+    const now = new Date();
+    let currtime = now.getHours() + ':' + (now.getMinutes() < 10 ? '0' : '') + now.getMinutes();
+    saveMessages(messageContent,currtime);
+    messageInput.value = '';
+    messageInput.focus();
+
+      
+    }
+  }
+
+  document.getElementById('messageInput').addEventListener('keydown', function(event) {
+    if (event.key === 'Enter') {
+      handleUserInput();
+    }
+  });
+
+
+
+
+    const nameContainer = document.getElementById('nameContainer');
+
+        // var username = document.getElementById('username').value
+    
+        var user_ref = database.ref('contactForm/')
+        user_ref.on('value', function(snapshot) {
+        var yourObject = snapshot.val()
+
+        //   console.log(typeof(data))
+        //   console.log(data)
+            // location.reload()
+            const chatContainer = document.getElementById('chatContainer');
+            chatContainer.innerHTML = '';
+        for (const key in yourObject) {
+            // console.log(key)
+        
+            if (yourObject.hasOwnProperty(key)) {
+            // Create a new div for each name
+            //   const nameBox = document.createElement('div');
+            //   nameBox.className = 'nameBox';
+            //   nameBox.textContent = yourObject[key].name;
+        
+            //   // Append the div to the container
+            //   nameContainer.appendChild(nameBox);
+            addMessage(yourObject[key].name,yourObject[key].time)
+            // console.log(yourObject[key].name,yourObject[key].time)
+            }
+        }
+        
+
+        
+    
+        
+    
+        })
+    
+
+    // Initial messages
+    //   addMessage('Hello. How are you today?', false);
+    //   addMessage('Hey! I\'m fine. Thanks for asking!', true);
+    //   addMessage('Sweet! So, what do you wanna do today?', false);
+    //   addMessage('Nah, I dunno. Play soccer.. or learn more coding perhaps?', true);
+</script>
+
+</body>
+</html>

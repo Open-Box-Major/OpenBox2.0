@@ -222,3 +222,22 @@ body{
     gap : .4em;
     margin-left : auto;
 }
+
+
+
+
+/* ***********chatbox message styling************** */
+
+.container{
+    background-color : var(--bush);
+    width : 90%;
+    margin : 1em auto;
+    color : white;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+}
+
+
+#messageInput:focus{
+    outline : none;
+}
