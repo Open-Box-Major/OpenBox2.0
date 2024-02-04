@@ -6,8 +6,15 @@
     <title>About us</title>
     <link rel = "stylesheet" href = "style.css">
     <script src = "main.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&family=Poppins:wght@200&display=swap" rel="stylesheet">
 </head>
 <style>
+    *{
+        font-family: 'Lato', sans-serif;
+        font-family: 'Poppins', sans-serif;
+    }
     .about-box{
         display : flex;
         flex-direction : column;
@@ -25,22 +32,27 @@
     .about-card img{
         height: 12vh;
         width: 12vh;
-        border-radius: 50%;
+        border-top-left-radius: 25px;
+        border-bottom-left-radius: 25px;
+        border-bottom-right-radius: 25px;
         object-fit: cover;
-        border : solid 2px #5B0888;
     }
 
     .about-card{
         display : flex;
         flex-direction: row;
-        background-color : #713ABE;
-        border : solid 2px #5B0888;
-        border-radius : 20px;
+        background-color : #9D76C1;
+        box-shadow: rgba(113, 58, 190, .4) 0px 8px 24px;
+        
+        border-top-left-radius: 25px;
+        border-bottom-left-radius: 25px;
+        border-bottom-right-radius: 25px;
         padding : 1em 2em;
-        justify-content: space-between;
+        justify-content: center;
         align-items: center;
         width : 70%;
         margin : auto;
+        gap : 1em;
     }
     .about-card:last-child{
         flex-direction: row-reverse;
@@ -53,7 +65,9 @@
     .img-wrapper > img{
         border-radius: 0;
         object-position: 0 10%;
-        border-radius: 50%;
+        border-top-left-radius: 25px;
+        border-bottom-left-radius: 25px;
+        border-bottom-right-radius: 25px;
     }
 </style>
 <body>

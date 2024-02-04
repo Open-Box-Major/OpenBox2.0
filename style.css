@@ -1,6 +1,8 @@
 *{
     margin : 0;
     padding : 0;
+    font-family: 'Lato', sans-serif;
+font-family: 'Poppins', sans-serif;
 }
 :root{
     /*pallete */
@@ -13,6 +15,11 @@
 
 body{
     background-color : var(--aux);
+    width : 100vw;
+    height: 100vh;
+}
+body, html{
+    overflow-x : hidden;
 }
 
 .navbar{
@@ -21,21 +28,43 @@ body{
     display : flex;
     flex-direction : row;
     align-items : center;
-    justify-content: flex-start;
+    justify-content: center;
     background-color : var(--purple);
     color : white;
 
     padding : 0 1em;
+    height: 25%;
+    position : relative;
 }
+.navbar::after{
+    content : "";
+    height: 100px;
+    width: 100px;
+    background-color : transparent;
+    position : absolute;
+    bottom : 0;
+    left : 0;
+    transform: translateY(100%);
+    border-top-left-radius: 50%;
+    box-shadow: -50px -1px 0 0 var(--purple);
+}
+
 
 .navbar h1{
     margin-left : 2vw;
 }
 .navbar img{
-    height: 80%;
-    border-radius : 50%;
+    height: 32%;
+    border-top-left-radius: 25px;
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+    position: absolute;
 }
 
+.login-text{
+    padding : 1em 0;
+    color : var(--purple)
+}
 .menu-toggle{
     height: 7vh;
     width: 7vh;
@@ -47,6 +76,8 @@ body{
     position: relative;
     margin-left : auto;
     margin-right : 2vw; 
+    align-self: flex-start;
+
 }
 .menu-toggle input{
     height: 100%;
@@ -83,11 +114,12 @@ body{
     width : 50vw;
     background-color: var(--purple);
 
-    top : 9.8vh;
+    top : 7vh;
     right : 0%;
     padding : 0 2em;
     transform : translateX(100%);
     transition: transform 300ms ease-out 0ms;
+    z-index : 1;
 }
 .navbar-content ul{
     list-style : none;
@@ -111,20 +143,25 @@ body{
     justify-content : space-evenly;
     align-items : center;
     width : 90vw;
-    height: 25vh;
+    height: 10vh;
     color : white;
     background-color : var(--bush);
 
-    border-radius : 20px;
+    border-top-left-radius : 40px;
+    border-bottom-left-radius : 40px;
+    border-bottom-right-radius : 40px;
+    box-shadow: rgba(113, 58, 190, .4) 0px 8px 24px;
+
 }
 .box-1{
     width : 30%;
 }
 .box-1 img{
-    width : 100%;
+    height : 7vh;
     aspect-ratio: 1/1;
-    border-radius : 50%;
-    border : solid 3px var(--dark-purple);
+    border-top-left-radius : 40px;
+    border-bottom-left-radius : 40px;
+    border-bottom-right-radius : 40px;
 
     object-fit: cover;
 }
@@ -136,7 +173,6 @@ body{
     width : 60%;
 }
 .box-2 h3{
-    background-color: var(--dark-purple);
     width : fit-content;
     padding : .2em 1em;
     border-radius: 20px;
@@ -153,30 +189,57 @@ body{
 /* login styling  */
 
 
-form{
+form > div{
     display : flex;
     flex-direction: column;
     gap : .6em;
     width : 90vw;
     margin : 2em auto;
+    box-shadow: rgba(113, 58, 190, .2) 0px 8px 24px;
+    padding : 1em;
+    width : 80%;
+    border-top-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+
+    position : relative;
 }
 input{
     background-color: transparent;
     border : none;
-    border-bottom-left-radius: 20px;
     padding : .2em;
-    border-bottom : solid 1px var(--dark-purple)
+    border-bottom : solid 1px var(--purple);
 }
 
 input[type = "submit"]{
     background-color: var(--dark-purple);
     color : white;
     padding : 1em 10em;
-    border-radius: 20px;
     width : fit-content;
-    margin : auto;
+    
+    position: relative;
+    left : 50%;
+    transform : translateX(-50%);
+    border-top-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    z-index : 0;
+
 }
 
+.password-toggle{
+    position: absolute;
+    bottom : 15%;
+    right : 5%;
+    z-index: -1;
+}
+.password-toggle img{
+    height: 20px;
+}
+.password-toggle input{
+    opacity: 0;
+    position: absolute;
+}
 .other-options{
     margin-top : 1em;
     display : flex;

@@ -5,12 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link rel = "stylesheet" href = "style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&family=Poppins:wght@200&display=swap" rel="stylesheet">
 </head>
 <body>
     <body>
         <div class = "navbar">
             <img src = "assets/logo.jpg">
-            <h1>Login</h1>
             <div class = "menu-toggle">
                 <input type = "checkbox" id = "checkbox">
                 <div class = "menu-stick"></div>
@@ -25,29 +27,34 @@
                 </ul>
             </div>
         </div>
+        <center><h1 class = "login-text">Login</h1></center>
         <form action = "" method = "post">
-            <label for = "name">Name</label>
-            <input type = "text" name = "name">
-            <labe for = "password">Password</labe>
-            <input type = "password" name = "password" id = "password">
             <div>
-                <input type = "checkbox" onclick = "showPassword()">
-                <label>Show</label>
+                <label for = "name">Name</label>
+                <input type = "text" name = "name">
+            </div>
+            <div>
+                <labe for = "password">Password</labe>
+                <input type = "password" name = "password" id = "password">
+                <div class = "password-toggle">
+                    <input type = "checkbox" onclick = "showPassword()">
+                    <img src = "assets/hide.png" class = "pwd-icon">
+                </div>
             </div>
             <input type="submit" value = "Log in">
         </form>
 
         <p style = "width : fit-content; margin : auto;">or sign up with</p>
-        <div class = "other-options">
+        <center><div class = "other-options">
             <div>
-                <img onclick="signin()"  src = "https://cdn1.iconfinder.com/data/icons/google-s-logo/150/Google_Icons-09-512.png">
+                <img onclick="signin()"  src = "assets/goggle_logo.png">
                 <p>Google</p>
             </div>
             <div>
-                <img src = "https://assets.stickpng.com/images/580b57fcd9996e24bc43c53e.png">
+                <img src = "assets/twitter_logo.png">
                 <p>Twitter</p>
             </div>
-        </div>
+        </div></center>
 </body>
 <script>
     let toggle = document.querySelector("#checkbox")
@@ -58,17 +65,22 @@
         {
             navContent.style.transform = "translateX(0%)"
         }else
-            navContent.style.transform = "translateX(100%)"
+        {
+            navContent.style.transform = "translateX(100%)";
+        }
 
     })
 
     function showPassword()
     {
+        let icon = document.querySelector(".pwd-icon");
         let pwd = document.querySelector("#password");
         pwd.type = pwd.type == "text" ? "password" : "text";
+        icon.src = pwd.type == "text" ? "assets/view.png" : "assets/hide.png";
     }
 
     document.addEventListener("submit", (e)=>{
+        console.log("here");
         e.preventDefault();
         document.location.href = "main.html"
     })
