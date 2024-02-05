@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Main</title>
     <link rel = "stylesheet" href = "style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&family=Poppins:wght@200&display=swap" rel="stylesheet">
     <script src = "main.js" defer></script>
 </head>
 <body>
@@ -122,8 +125,15 @@
 
     </div>
     <div class = "write-box">
-        <input type = "text" name = "opinion" id = "opinion" placeholder = "Share your opinon">
-        <img src = "../assets/add.png">
+        <img src = "../assets/add.png" onclick = "post()">
+    </div>
+
+    <div class = "post-box">
+        <label>Subject</label>
+        <input type = "text" placeholder = "subject of post">
+        <label>Body</label>
+        <textarea></textarea>
+        <input type = "submit" value = "post" onclick = "post()">
     </div>
 </body>
 </html>

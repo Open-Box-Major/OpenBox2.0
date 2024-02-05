@@ -139,6 +139,10 @@ body{
 .write-box img{
     aspect-ratio: 1/1;
     width : 10%;
+    background-color : var(--purple);
+    padding : 1em;
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
 }
 
 
@@ -228,8 +232,64 @@ body{
 }
 
 
+.post-box{
+    display : flex;
+    flex-direction: column;
+    position : absolute;
+    top : 50%;
+    left : 50%;
+    transform: translate(-50%, -50%);
+    background-color: var(--purple);
+    padding : 1em;
+    width : 70%;
+    color : white;
+    gap : 1em;
+    border-radius: 25px;
+    box-shadow: rgba(113, 58, 190, .5) 0px 30px 10px;
+    z-index : 0;
+    animation : post-animation 300ms forwards;
 
+}
+.post-box input{
+    padding : .5em 1em;
+    border-radius: 25px;
+    border : none;
+}
+.post-box input[type = "submit"]
+{
+    color : white;
+    background-color: var(--bush);
+    width : fit-content;
+    margin : 0 auto;
+    border : none;
+    padding : 1em 3em;
+    border-top-left-radius: 0;
+}
+@keyframes post-animation {
+    0%{
+        transform: translate(-50%, -50%) scale(0);
+        display : none;
+        top : 100%;
+    }
+    100%{
+        transform: translate(-50%, -50%) scale(1);
+        display : flex;
+        top : 50%;
+    }
+    
+}
 
+@keyframes post-box-out {
+    0%{
+        transform: translate(-50%, -50%) scale(1);
+        display: flex;
+    }
+    100%{
+        transform: translate(-50%, -50%) scale(0);
+        display : none;
+    }
+    
+}
 /* ***********chatbox message styling************** */
 
 /* all the styling is pasted in style of html only  */
