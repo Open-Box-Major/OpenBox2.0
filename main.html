@@ -50,7 +50,32 @@
             </div>
         </div>
     </div>
-</body>
+
+    
+
+     <script>
+         //oauth accesstoken hide script
+        let parmas={}
+        
+
+
+        let regex = /([^&=]+)=([^&]*)/g, m
+
+        while(m = regex.exec(location.href)){
+            parmas[decodeURIComponent(m[1])] = decodeURIComponent(m[2])
+        }
+
+        if(Object.keys(parmas).length >0){
+            localStorage.setItem('authInfo',JSON.stringify(parmas))
+        }
+
+        //hide access token
+
+        window.history.pushState({},document.title,"/"+"main.html")
+
+    </script>
+
+    
 <script>
     let toggle = document.querySelector("#checkbox")
     let navContent = document.querySelector(".navbar-content")
@@ -69,4 +94,6 @@
         document.location.href = address;
     }
 </script>
+
+</body> 
 </html>
