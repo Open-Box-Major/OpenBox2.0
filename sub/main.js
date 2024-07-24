@@ -10,22 +10,22 @@ toggle.addEventListener("click", (e)=>{
 
 })
 
-let post_box = document.querySelector(".post-box");
-post_box.style.display = "none";
+let add_room_box = document.querySelector(".post-box");
+add_room_box.style.display = "none";
 
 function post()
 {
-    console.log(post_box.style.display);
+    console.log(add_room_box.style.display);
     
-    if(post_box.style.display == "flex")
+    if(add_room_box.style.display == "flex")
     {
-        post_box.style.animation = "post-box-out 300ms forwards";
-        setTimeout(()=>{post_box.style.display = "none"}, 300)
+        add_room_box.style.animation = "post-box-out 300ms forwards";
+        setTimeout(()=>{add_room_box.style.display = "none"}, 300)
 
     }else
     {
-        post_box.style.animation = "post-animation 300ms forwards";
-        setTimeout(()=>{post_box.style.display = "flex"}, 300)
+        add_room_box.style.animation = "post-animation 300ms forwards";
+        setTimeout(()=>{add_room_box.style.display = "flex"}, 300)
     }
 
 

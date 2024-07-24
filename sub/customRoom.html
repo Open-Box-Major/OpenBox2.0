@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main</title>
+    <link rel = "stylesheet" href = "style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&family=Poppins:wght@200&display=swap" rel="stylesheet">
+    <script src = "main.js" defer></script>
+    <link rel = "stylesheet" href = "customRoom.css">
+    <script src = "customRoom.js" defer></script>
+</head>
+<body>
+    <div class = "navbar">
+        <img src = "../assets/logo.jpg">
+        <h1>Custom rooms</h1>
+        <div class = "menu-toggle">
+            <input type = "checkbox" id = "checkbox">
+            <div class = "menu-stick"></div>
+            <div class = "menu-stick"></div>
+            <div class = "menu-stick"></div>
+        </div>
+        <div class = "navbar-content">
+            <ul>
+                <li>Main</li>
+                <li>Creators</li>
+                <li>Confession</li>
+            </ul>
+        </div>
+    </div>
+    <div class = "main-flex">
+        <div>
+            <div class = "menu-flex">
+                <div class = "menu-card">
+                    Mini project
+                </div>
+            </div>
+            <div class = "add-flex">
+                <span></span>
+                <img src = "../assets/add.png" onclick = "addRoom   ()">
+            </div>
+        </div>
+        <div class="rooms-flex">
+            <div class = "room-card">
+                <div>
+                    <img src = "https://www.cta.org/wp-content/uploads/2020/03/empty-classroom.jpg">
+                </div>
+                <div>
+                    <h5>ISE B</h5>
+                    <p>One line description should do for now</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class = "add-room-box">
+        <label>Room Name</label>
+        <input text = "text">
+        <input type = "submit" value = "add" onclick = "addRoom()">
+    </div>
+</body>
+</html>

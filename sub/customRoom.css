@@ -1,0 +1,178 @@
+.main-flex{
+    display: flex;
+    flex-direction: column;
+    width : 100%;
+    height: 100%;
+    margin-top : 10vh;
+}
+
+.main-flex > div:first-child{
+    display: flex;
+    flex-direction : row;
+    width : 100%;
+    height: 10vh;
+}
+
+.menu-flex{
+    display : flex;
+    flex-direction : row;
+    width : 80%;
+    height: 100%;
+    align-items: center;
+    justify-content: flex-start;
+    overflow-x: scroll;
+
+    gap : 1em;
+}
+
+.menu-card{
+    display : flex;
+    padding : .5em 1.2em;
+    border  : solid 1px #5B0888;
+    border-radius: 50px;
+    height: fit-content;
+    width : fit-content;
+    text-wrap: nowrap;
+    color : #5B0888;
+}
+
+.add-flex{
+    display : flex;
+    justify-content : center;
+    align-items : center;
+    width : 20%;
+}
+.add-flex > span{
+    display : block;
+    height: 6vh;
+    width : 6vh;
+    background-color : #5B0888;
+    position : absolute;
+    z-index : -1;
+    border-radius : 50%;
+
+    transform : scale(1.2);
+}
+.add-flex > img{
+    height: 6vh;
+    /* width : 2vh; */
+}
+
+
+.rooms-flex{
+    display: flex;
+    flex-direction : column;
+    gap : 1em;
+    overflow-y : scroll;
+    height: 100%;
+    width: 100%;
+}
+
+.room-card{
+    display: flex;
+    flex-direction: row;
+    width : 90%;
+    height: 10vh;
+    background-color: #9D76C1;
+    border  : solid 2px #5B0888;
+    border-radius: 10px;
+    padding : 2.5%;
+    margin : 0 auto;
+}
+.room-card > div:first-child{
+    width : 30%;
+    display: flex;
+    justify-content: center;
+    align-items : center;
+}
+.room-card  :last-child{
+    width : 70%;
+    display : flex;
+    flex-direction : column;
+    justify-content: space-around;
+}
+.room-card > div > h5{
+    width : fit-content;
+    padding : .2em 1em;
+    color : white;
+    border-radius : 20px;
+    background-color: #5B0888;
+}
+.room-card > div > p{
+    width : fit-content;
+    padding : .2em 1em;
+    color : white;
+    border-radius : 2px;
+    background-color: #5B0888;
+    font-size : .8em;
+}
+.room-card > div > img{
+    height : 7vh;
+    width : 7vh;
+    border-radius : 50%;
+}
+
+
+
+
+
+
+
+.add-room-box{
+    display : none;
+    flex-direction: column;
+    position : absolute;
+    top : 50%;
+    left : 50%;
+    transform: translate(-50%, -50%);
+    background-color: var(--purple);
+    padding : 1em;
+    width : 70%;
+    color : white;
+    gap : 1em;
+    border-radius: 25px;
+    box-shadow: rgba(113, 58, 190, .5) 0px 30px 10px;
+    z-index : 0;
+    animation : post-animation 300ms forwards;
+
+}
+.add-room-box input{
+    padding : .5em 1em;
+    border-radius: 25px;
+    border : none;
+}
+.add-room-box input[type = "submit"]
+{
+    color : white;
+    background-color: var(--bush);
+    width : fit-content;
+    margin : 0 auto;
+    border : none;
+    padding : 1em 3em;
+    border-top-left-radius: 0;
+}
+@keyframes room-add-animation {
+    0%{
+        transform: translate(-50%, -50%) scale(0);
+        display : none;
+        top : 100%;
+    }
+    100%{
+        transform: translate(-50%, -50%) scale(1);
+        display : flex;
+        top : 50%;
+    }
+    
+}
+
+@keyframes room-add-box-out {
+    0%{
+        transform: translate(-50%, -50%) scale(1);
+        display: flex;
+    }
+    100%{
+        transform: translate(-50%, -50%) scale(0);
+        display : none;
+    }
+    
+}
