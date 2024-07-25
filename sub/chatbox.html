@@ -197,7 +197,7 @@
     let urlParams = new URLSearchParams(queryString);
 
     // Get the values of the parameters
-    let roomname = urlParams.get('room') || 'contactForm';
+    let roomname = urlParams.get('room') || 'General';
 
 
 
@@ -205,7 +205,7 @@
 
     //update firebase
 
-    var contactFormDB = firebase.database().ref(roomname);
+    var contactFormDB = firebase.database().ref("Chatroom/"+roomname+'/');
 
     const saveMessages = (name,time) => {
     var newContactForm = contactFormDB.push();
@@ -247,7 +247,7 @@
 
         // var username = document.getElementById('username').value
     
-        var user_ref = database.ref(roomname+'/')
+        var user_ref = database.ref("Chatroom/"+roomname+'/')
         user_ref.on('value', function(snapshot) {
         var yourObject = snapshot.val()
 
