@@ -11,7 +11,7 @@ toggle.addEventListener("click", (e)=>{
 })
 
 let add_room_box = document.querySelector(".post-box");
-add_room_box.style.display = "none";
+// add_room_box.style.display = "none";
 
 function post()
 {

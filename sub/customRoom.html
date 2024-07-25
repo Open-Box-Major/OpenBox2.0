@@ -39,10 +39,10 @@
             </div>
             <div class = "add-flex">
                 <span></span>
-                <img src = "../assets/add.png" onclick = "addRoom   ()">
+                <img src = "../assets/add.png" onclick = "addRoom()">
             </div>
         </div>
-        <div class="rooms-flex">
+        <div class="rooms-flex" id="roomsContainer">
             <!-- <div class = "room-card">
                 <div>
                     <img src = "https://www.cta.org/wp-content/uploads/2020/03/empty-classroom.jpg">
@@ -60,7 +60,9 @@
         <input text = "text" id = "room-name">
         <label>Room Description</label>
         <textarea id = "room-desc" style = "height : 5em;" placeholder = "under 30 words"></textarea>
-        <input type = "submit" value = "add" onclick = "addRoom()">
+        <input type = "submit" value = "add" onclick = "Firebaseroom()">
     </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/7.14.1-0/firebase.js"></script>
 </body>
 </html>
