@@ -128,9 +128,10 @@ document.querySelectorAll(".menu-card").forEach(card =>{
 function createRoomCard(img, name, about){
     let roomFlex = document.querySelector(".rooms-flex")
     let roomCard = document.createElement("div")
+    roomCard.setAttribute("onclick", `window.location.href='./chatbox.html?room=${encodeURIComponent(name)}'`);
     roomCard.classList.add("room-card")
     roomCard.innerHTML = `
-                <div onclick="window.location.href='./chatbox.html?room=${encodeURIComponent(name)}'" >
+                <div>
                     <img src = "${img}">
                 </div>
                 <div>
