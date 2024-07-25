@@ -33,9 +33,9 @@
     <div class = "main-flex">
         <div>
             <div class = "menu-flex">
-                <div class = "menu-card">
+                <!-- <div class = "menu-card">
                     Mini project
-                </div>
+                </div> -->
             </div>
             <div class = "add-flex">
                 <span></span>
@@ -57,7 +57,9 @@
 
     <div class = "add-room-box">
         <label>Room Name</label>
-        <input text = "text">
+        <input text = "text" id = "room-name">
+        <label>Room Description</label>
+        <textarea id = "room-desc" style = "height : 5em;" placeholder = "under 30 words"></textarea>
         <input type = "submit" value = "add" onclick = "addRoom()">
     </div>
 </body>

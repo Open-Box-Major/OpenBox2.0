@@ -1,14 +1,37 @@
-function createMenuCard(name){
+menuList = ["Mini Project", "Fest", "Quantum-X", "Assignment help"]
+let activeMenu = 0;
+
+function createMenuCard(name, index){
     let menu = document.querySelector(".menu-flex");
     let menuCard = document.createElement("div")
     menuCard.classList.add("menu-card")
     menuCard.innerHTML = name
+    menuCard.id = `menu-card-${index}`
     menu.appendChild(menuCard)
 }
 
-menuList = ["Fest", "Quantum-X", "Assignment help"]
-menuList.forEach(name => {
-    createMenuCard(name)
+function menuCardActivate(oldIndex, newIndex){
+    let id = `menu-card-${oldIndex}`
+    let menuCard = document.querySelector(`#${id}`);
+    menuCard.style = "background-color : #E5CFF7; color : #5B0888;"
+
+    id = `menu-card-${newIndex}`
+    menuCard = document.querySelector(`#${id}`)
+    menuCard.style = "background-color : #5B0888; color : white;"
+    activeMenu = newIndex;
+}
+
+
+menuList.forEach((name, index) => {
+    createMenuCard(name, index)
+});
+menuCardActivate(activeMenu, activeMenu);
+
+document.querySelectorAll(".menu-card").forEach(card =>{
+    card.addEventListener("click", (e)=>{
+        let newIndex = card.id
+        menuCardActivate(activeMenu ,newIndex.split("-")[2])
+    })
 });
 
 function createRoomCard(img, name, about){
@@ -26,6 +49,8 @@ function createRoomCard(img, name, about){
     `
     roomFlex.appendChild(roomCard)
 }
+
+
 
 roomList = [
     {
@@ -52,6 +77,20 @@ function addRoom()
     // console.log(add_room_box.style.display);
     if(add_room_box.style.display == "flex")
     {
+        
+        let roomName = document.querySelector("#room-name").value;
+        let roomDesc = document.querySelector("#room-desc").value;
+
+        if(roomName.length > 15 || roomName.length == 0)
+            alert("Room Name should be atleast one character and under or equal to 15 characters")
+        else if(roomDesc.length > 25 || roomDesc.length == 0)
+            alert("Room Description should be atleast one character and under or equal to 25 characters")
+        else{
+            createRoomCard("https://images.pexels.com/photos/1170986/pexels-photo-1170986.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500", roomName, roomDesc);
+        }
+        document.querySelector("#room-name").value = "";
+        document.querySelector("#room-desc").value = "";
+
         add_room_box.style.animation = "post-box-out 300ms forwards";
         setTimeout(()=>{add_room_box.style.display = "none"}, 300)
 
@@ -63,4 +102,6 @@ function addRoom()
 
 
 }
+
+
 
