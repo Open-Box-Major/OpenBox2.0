@@ -16,7 +16,7 @@ function createRoomCard(img, name, about){
     let roomCard = document.createElement("div")
     roomCard.classList.add("room-card")
     roomCard.innerHTML = `
-                <div>
+                <div onclick="window.location.href='./chatbox.html?room=${encodeURIComponent(name)}'" >
                     <img src = "${img}">
                 </div>
                 <div>
@@ -49,7 +49,7 @@ add_room_box.style.display = "none";
 
 function addRoom()
 {
-    console.log(add_room_box.style.display);
+    // console.log(add_room_box.style.display);
     if(add_room_box.style.display == "flex")
     {
         add_room_box.style.animation = "post-box-out 300ms forwards";
