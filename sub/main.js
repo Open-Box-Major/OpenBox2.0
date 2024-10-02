@@ -89,7 +89,7 @@ function writeNewPost(subject, body){
             obj["dislikes"] = 0;
             obj["comment"] = 0;
             obj["time"] = Date();
-            obj["visible"] = "false";
+            obj["visible"] = false;
             
             set(ref(database,`posts/${id}`, ), obj);
             
