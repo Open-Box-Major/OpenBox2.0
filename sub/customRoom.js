@@ -1,5 +1,6 @@
-// firebase
 
+// database init
+// Firebase creds...
 
 
 const firebaseConfig = {
@@ -14,6 +15,12 @@ const firebaseConfig = {
 };
 
 
+
+
+
+
+
+
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
@@ -22,10 +29,16 @@ var database = firebase.database()
 
 
 
-//update firebase
+
+
+//Go to the room path to fetch and set
 
 var contactFormDB = firebase.database().ref("Rooms/");
 
+
+
+
+//Set the message and timestamp of new message in Firebase
 const saveMessages = (name,desc,time) => {
 var newContactForm = contactFormDB.push();
 

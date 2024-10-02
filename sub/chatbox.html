@@ -1,3 +1,29 @@
+
+<!-- =========================================================================================================
+FILE NAME   : chatbox.html
+DESCRIPTION : The file contains the html, css and js part of the chatrooms, it's like a template, it will fetch 
+              message from the firebase of that particular room, it contains firebase creds.. and the function 
+              to fetch and set value to/from firebase and display on web using html and css(dynamically).
+              It will dynamically update if any data is updated/changed/set to firebase database
+AUTHOR      : P Aditya 
+CREATED ON  :  
+LAST UPDATED:  October 2, 2024
+VERSION     :  2.0
+
+COPYRIGHT NOTICE:
+This file is the property of Open Box. Unauthorized reproduction or
+dissemination of this file is strictly prohibited. All rights reserved.
+
+CHANGELOG:
+=========================================================================================================== -->
+
+
+
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,7 +32,30 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&family=Poppins:wght@200&display=swap" rel="stylesheet">
+
+
+
+
+
+
+
+
+
+  <!---------------------------- javascript linking <main.js> ----------------------------------------->
   <script src = "main.js" defer></script>
+  <!-- --------------------------------------------------------------------------------------------- -->
+
+
+
+
+
+
+
+
+
+
+  <!--------------------------------------- Css styling ------------------------------------------------->
+
   <style>
     *{
       font-family: 'Lato', sans-serif;
@@ -106,6 +155,19 @@
 }
   </style>
 </head>
+<!-- ---------------------------------------------------------------------------------------------------- -->
+
+
+
+
+
+
+
+
+
+
+<!-------------------------------------------- Body (html content) ------------------------------------------->
+
 <body>
 
     <div class = "navbar">
@@ -134,7 +196,36 @@
         <input type="text" id="messageInput" placeholder="Type your message and press Enter">
         <img src = "../assets/add.png" onclick = "handleUserInput()">
     </div>
+
+  <!-- ------------------------------------------------------------------------------------------------- -->
+
+
+
+
+
+
+
+
+
+
+
+<!------------------------------------------ Firebase CDN linking ------------------------------------------>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/7.14.1-0/firebase.js"></script>
+
+<!-- ---------------------------------------------------------------------------------------------------- -->
+
+
+
+
+
+
+
+
+
+
+<!-- ----------------Internal javascript for connecting with firebase to fetch and set message -------------->
+
 <script>
     function addMessage(content,time, isRight,) {
         const chatContainer = document.getElementById('chatContainer');
@@ -167,7 +258,14 @@
 
 
 
-    //database init
+
+
+
+
+
+
+    // database init
+    // Firebase creds...
 
 
     const firebaseConfig = {
@@ -182,17 +280,20 @@
     };
 
 
+
+
+
+
+
+
+
     // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
 
     // Set database variable
     var database = firebase.database()
 
-
-
-
     //Fetch the url params
-
     let queryString = window.location.search;
 
     // Create a URLSearchParams object
@@ -205,10 +306,19 @@
 
 
 
-    //update firebase
+
+
+    //Go to the room path to fetch and set
 
     var contactFormDB = firebase.database().ref("Chatroom/"+roomname+'/');
 
+
+
+
+
+
+
+    //Set the message and timestamp of new message in Firebase
     const saveMessages = (name,time) => {
 
     var newContactForm = contactFormDB.push();
@@ -220,6 +330,14 @@
 
     };
 
+
+
+
+
+
+
+
+  //Handle user input(message) on click send button
 
   function handleUserInput() {
     const messageInput = document.getElementById('messageInput');
@@ -238,6 +356,16 @@
     }
   }
 
+
+
+
+
+
+
+
+
+  //Handle user input(message) on click enter(keyboard)
+
   document.getElementById('messageInput').addEventListener('keydown', function(event) {
     if (event.key === 'Enter') {
       handleUserInput();
@@ -247,50 +375,44 @@
 
 
 
-    const nameContainer = document.getElementById('nameContainer');
 
-        // var username = document.getElementById('username').value
-    
+
+
+
+
+  //Fetch data from firebase by taking snapshot and disaply on the web
+
+    const nameContainer = document.getElementById('nameContainer');
         var user_ref = database.ref("Chatroom/"+roomname+'/')
         user_ref.on('value', function(snapshot) {
         var yourObject = snapshot.val()
 
-        //   console.log(typeof(data))
-        //   console.log(data)
-            // location.reload()
             const chatContainer = document.getElementById('chatContainer');
             chatContainer.innerHTML = '';
         for (const key in yourObject) {
-            // console.log(key)
         
             if (yourObject.hasOwnProperty(key)) {
-            // Create a new div for each name
-            //   const nameBox = document.createElement('div');
-            //   nameBox.className = 'nameBox';
-            //   nameBox.textContent = yourObject[key].name;
-        
-            //   // Append the div to the container
-            //   nameContainer.appendChild(nameBox);
-            // addMessage(yourObject[key].name,yourObject[key].time)
-            // console.log(yourObject[key].name,yourObject[key].time)
-
             addMessage(yourObject[key].name, yourObject[key].time);
 
             }
         }
-
-    
         })
+
+
     
 
-    // Initial messages
-    //   addMessage('Hello. How are you today?', false);
-    //   addMessage('Hey! I\'m fine. Thanks for asking!', true);
-    //   addMessage('Sweet! So, what do you wanna do today?', false);
-    //   addMessage('Nah, I dunno. Play soccer.. or learn more coding perhaps?', true);
+   
+
+
+
+
 
 
 // Function to check for profanity in the message
+//https://profanity-check-mznt.onrender.com/check_profanity?message="<your message>"
+//Own implemnted flask server(python) which return true if cuss word present else returns false
+
+
 function checkProfanity(messageContent,currtime) {
   console.log(messageContent)
   const url = `https://profanity-check-mznt.onrender.com/check_profanity?message=${encodeURIComponent(messageContent)}`;
@@ -318,6 +440,10 @@ function checkProfanity(messageContent,currtime) {
 }
 
 </script>
+
+<!-- -------------------------------------------------------------------------------------------------- -->
+
+
 
 </body>
 </html>
