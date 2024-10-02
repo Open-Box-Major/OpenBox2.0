@@ -199,7 +199,7 @@ a{
 
 .msg-body{
     display : flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     background-color : var(--bush);
     padding : 1em 1em;

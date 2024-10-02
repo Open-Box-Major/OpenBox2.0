@@ -69,33 +69,141 @@ function getNewId(){
 }
 
 function writeNewPost(subject, body){
-    // onValue(keyRef, (snapshot) =>{
-        //     const data = snapshot.val();
-        // let id = data.length;
-        // console.log(obj)
-        // console.log("post added")
-        // })
-        let keyRef =  ref(database, "posts/");
-        get(keyRef).then((snapshot) =>{
-            const data = snapshot.val();
-            let id = 0;
-            if(data)
-                id = data.length;
+    let keyRef =  ref(database, "posts/");
+    get(keyRef).then((snapshot) =>{
+        const data = snapshot.val();
+        let id = 0;
+        if(data)
+            id = Object.keys(data).at(-1) + 1;
 
-            let obj = {};
-            obj["subject"] = subject;
-            obj["body"] = body;
-            obj["likes"] = 0;
-            obj["dislikes"] = 0;
-            obj["comment"] = 0;
-            obj["time"] = Date();
-            obj["visible"] = false;
-            
+        let obj = {};
+        obj["subject"] = subject;
+        obj["body"] = body;
+        obj["likes"] = 0;
+        obj["dislikes"] = 0;
+        obj["comment"] = 0;
+        obj["time"] = Date();
+        obj["visible"] = false;
+        
+        if(body != "" && subject != ""){
             set(ref(database,`posts/${id}`, ), obj);
-            
-    
-        // set(ref(database, "posts/", ), obj);
+            console.log("post added")
+        }
+        
         console.log(data)
-        console.log("post added")
+        console.log(id)
     })
+}
+
+
+function fetchPost(){
+    let keyRef = ref(database, "posts/");
+    onValue(keyRef, (snapshot) =>{
+        let data = snapshot.val();
+
+        Object.keys(data).forEach((key) => {
+            let post = data[key];
+            if(post["visible"])
+                appendMessageCard(post["subject"], post["time"], post["body"], post["likes"], post["dislikes"], post["comment"]);
+        })
+    })
+}
+
+fetchPost();
+// ---------------------------------------------------------------------------------------------
+
+function formatDate(dateString) {
+    const date = new Date(dateString);
+    const year = date.getFullYear(); // Get full year
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // Get month (0-based) and add leading zero
+    const day = String(date.getDate()).padStart(2, '0'); // Get day and add leading zero if necessary
+
+    return `${year}/${month}/${day}`;
+}
+
+function appendMessageCard(subject, date, body, likes, dislikes, shares) {
+    // Create the main msg-card div
+    const msgCard = document.createElement('div');
+    msgCard.className = 'msg-card';
+
+    // Create the anchor div
+    const anchorDiv = document.createElement('div');
+    anchorDiv.className = 'anchor';
+    msgCard.appendChild(anchorDiv);
+
+    // Create the msg-head div
+    const msgHead = document.createElement('div');
+    msgHead.className = 'msg-head';
+
+    // Create and append the subject and date paragraphs
+    const subjectParagraph = document.createElement('p');
+    subjectParagraph.textContent = subject;
+    const dateParagraph = document.createElement('p');
+    dateParagraph.textContent = formatDate(date);
+
+    msgHead.appendChild(subjectParagraph);
+    msgHead.appendChild(dateParagraph);
+
+    msgCard.appendChild(msgHead);
+
+    // Create the msg-body div
+    const msgBody = document.createElement('div');
+    msgBody.className = 'msg-body';
+
+    // Create and append the body paragraph
+    const bodyParagraph = document.createElement('p');
+    bodyParagraph.textContent = body;
+    msgBody.appendChild(bodyParagraph);
+
+    msgCard.appendChild(msgBody);
+
+    // Create the msg-foot div
+    const msgFoot = document.createElement('div');
+    msgFoot.className = 'msg-foot';
+
+    // Create the msg-likes div
+    const msgLikes = document.createElement('div');
+    msgLikes.className = 'msg-likes';
+
+    // Create and append the likes elements
+    const likeImg = document.createElement('img');
+    likeImg.src = '../assets/okay.png';
+    const likesParagraph = document.createElement('p');
+    likesParagraph.textContent = likes;
+
+    const dislikeImg = document.createElement('img');
+    dislikeImg.src = '../assets/dislike.png';
+    const dislikesParagraph = document.createElement('p');
+    dislikesParagraph.textContent = dislikes;
+
+    msgLikes.appendChild(likeImg);
+    msgLikes.appendChild(likesParagraph);
+    msgLikes.appendChild(dislikeImg);
+    msgLikes.appendChild(dislikesParagraph);
+
+    // Append msg-likes to msg-foot
+    msgFoot.appendChild(msgLikes);
+
+    // Create the shares div
+    const sharesDiv = document.createElement('div');
+    sharesDiv.className = 'shares';
+
+    // Create and append the shares elements
+    const shareImg = document.createElement('img');
+    shareImg.src = '../assets/send.png';
+    const sharesParagraph = document.createElement('p');
+    sharesParagraph.textContent = shares;
+
+    sharesDiv.appendChild(shareImg);
+    sharesDiv.appendChild(sharesParagraph);
+
+    // Append shares to msg-foot
+    msgFoot.appendChild(sharesDiv);
+
+    // Append msg-foot to msg-card
+    msgCard.appendChild(msgFoot);
+
+    // Append the msg-card to msg box
+
+    document.querySelector(".msg-box").appendChild(msgCard);
 }
