@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&family=Poppins:wght@200&display=swap" rel="stylesheet">
-    <script src = "main.js" defer></script>
+    <script type = "module" src = "main.js" defer></script>
 </head>
 <body>
     <div class = "navbar">
@@ -127,15 +127,15 @@
 
     </div>
     <div class = "write-box">
-        <img src = "../assets/add.png" onclick = "post()">
+        <img src = "../assets/add.png" id = "addPostToggle">
     </div>
 
     <div class = "post-box">
         <label>Subject</label>
-        <input type = "text" placeholder = "subject of post">
+        <input type = "text" placeholder = "subject of post" id = "post-subject">
         <label>Body</label>
-        <textarea></textarea>
-        <input type = "submit" value = "post" onclick = "post()">
+        <textarea id = "post-content"></textarea>
+        <input type = "submit" value = "post" id = "addPost">
     </div>
 </body>
 </html>
