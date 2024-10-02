@@ -210,6 +210,7 @@
     var contactFormDB = firebase.database().ref("Chatroom/"+roomname+'/');
 
     const saveMessages = (name,time) => {
+
     var newContactForm = contactFormDB.push();
 
     newContactForm.set({
@@ -228,7 +229,8 @@
     //   addMessage(messageContent, false);
     const now = new Date();
     let currtime = now.getHours() + ':' + (now.getMinutes() < 10 ? '0' : '') + now.getMinutes();
-    saveMessages(messageContent,currtime);
+    // saveMessages(messageContent,currtime);
+    checkProfanity(messageContent,currtime);
     messageInput.value = '';
     messageInput.focus();
 
@@ -269,8 +271,11 @@
         
             //   // Append the div to the container
             //   nameContainer.appendChild(nameBox);
-            addMessage(yourObject[key].name,yourObject[key].time)
+            // addMessage(yourObject[key].name,yourObject[key].time)
             // console.log(yourObject[key].name,yourObject[key].time)
+
+            addMessage(yourObject[key].name, yourObject[key].time);
+
             }
         }
 
@@ -285,7 +290,32 @@
     //   addMessage('Nah, I dunno. Play soccer.. or learn more coding perhaps?', true);
 
 
+// Function to check for profanity in the message
+function checkProfanity(messageContent,currtime) {
+  console.log(messageContent)
+  const url = `https://profanity-check-mznt.onrender.com/check_profanity?message=${encodeURIComponent(messageContent)}`;
 
+  // Call the profanity API
+  fetch(url)
+    .then(response => response.json())
+    .then(data => {
+      // Check if the API detected profanity
+      if (!data.contains_profanity) {
+        // If no profanity, proceed with adding the original message
+        // addMessage(yourObject[key].name, yourObject[key].time);
+        saveMessages(messageContent,currtime);
+        // console.log()
+      } else {
+        // If profanity is found, sanitize the message by replacing it with "!@#$%^&*"
+        const sanitizedMessage = "!@#$%^&*";
+        // console.log(data.contains_profanity)
+        saveMessages(sanitizedMessage,currtime);
+      }
+    })
+    .catch(error => {
+      console.error("Error checking profanity:", error);
+    });
+}
 
 </script>
 
