@@ -74,7 +74,7 @@ function writeNewPost(subject, body){
         const data = snapshot.val();
         let id = 0;
         if(data)
-            id = Object.keys(data).at(-1) + 1;
+            id = parseInt(Object.keys(data).at(-1)) + 1;
 
         let obj = {};
         obj["subject"] = subject;
