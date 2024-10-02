@@ -101,7 +101,7 @@ function fetchPost(){
     onValue(keyRef, (snapshot) =>{
         let data = snapshot.val();
         let msgBox = document.querySelector(".msg-box");
-        msgBox.innerHtml = "";
+        msgBox.innerHTML = "";
         Object.keys(data).forEach((key) => {
             let post = data[key];
             if(post["visible"])
