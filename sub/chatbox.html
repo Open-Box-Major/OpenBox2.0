@@ -414,29 +414,29 @@ CHANGELOG:
 
 
 function checkProfanity(messageContent,currtime) {
-  console.log(messageContent)
-  const url = `https://profanity-check-mznt.onrender.com/check_profanity?message=${encodeURIComponent(messageContent)}`;
+  // console.log(messageContent)
+  // const url = `https://profanity-check-mznt.onrender.com/check_profanity?message=${encodeURIComponent(messageContent)}`;
 
-  // Call the profanity API
-  fetch(url)
-    .then(response => response.json())
-    .then(data => {
-      // Check if the API detected profanity
-      if (!data.contains_profanity) {
+  // // Call the profanity API
+  // fetch(url)
+  //   .then(response => response.json())
+  //   .then(data => {
+  //     // Check if the API detected profanity
+  //     if (!data.contains_profanity) {
         // If no profanity, proceed with adding the original message
         // addMessage(yourObject[key].name, yourObject[key].time);
         saveMessages(messageContent,currtime);
         // console.log()
-      } else {
-        // If profanity is found, sanitize the message by replacing it with "!@#$%^&*"
-        const sanitizedMessage = "!@#$%^&*";
-        // console.log(data.contains_profanity)
-        saveMessages(sanitizedMessage,currtime);
-      }
-    })
-    .catch(error => {
-      console.error("Error checking profanity:", error);
-    });
+    //   } else {
+    //     // If profanity is found, sanitize the message by replacing it with "!@#$%^&*"
+    //     const sanitizedMessage = "!@#$%^&*";
+    //     // console.log(data.contains_profanity)
+    //     saveMessages(sanitizedMessage,currtime);
+    //   }
+    // })
+    // .catch(error => {
+    //   console.error("Error checking profanity:", error);
+    // });
 }
 
 </script>
