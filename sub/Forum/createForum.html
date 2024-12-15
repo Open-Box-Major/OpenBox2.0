@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main</title>
+    <link rel = "stylesheet" href = "style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&family=Poppins:wght@200&display=swap" rel="stylesheet">
+    <link rel = "stylesheet" href = "./forum.css">
+    <link rel = "stylesheet" href = "./../style.css">
+    <script src = "forum.js" defer></script>
+    <script type = module src = "../main.js" defer></script>
+
+    <style>
+        .main-flex{
+            overflow-y: scroll;
+        }
+        
+        .poll-options {
+            margin-top: 10px;
+            display: flex;
+            flex-direction: column;
+        }
+        .poll-options input {
+            margin: 5px 0;
+        }
+        .poll-options button {
+            align-self: flex-start;
+            margin-top: 10px;
+        }
+        .dynamicDiv {
+            width : 95%;
+            border: 1px solid #ccc;
+            border-radius: 25px;
+            padding: 1em 2.5%;
+            margin-top : 2em;
+        }
+        #dynamicContent {
+            display: flex;
+            flex-direction: column;
+        }
+
+        #mainForm{
+            display : flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            width: 85vw;
+            padding : 2em 2.5vw;
+            
+        }
+
+        input, textarea{
+            border : none;
+            border-bottom : solid 2px #713ABE;
+            border-bottom-right-radius: 10px;
+
+        }
+
+        .optionType{
+            background-color: #E5CFF7;
+            border : solid 1px #713ABE;
+            border-radius: 15px;
+            padding : .2em 1em;
+            color : black;
+        }
+
+        .next-button, .create-button{
+            color : black;
+            width : 90%;
+            margin: 0 auto;
+            padding : .5em 2em;
+            background-color: #E5CFF7;
+            border : solid 2px #713ABE;
+            border-radius : 25px;
+        }
+    </style>
+</head>
+<body>
+    <div class = "navbar">
+        <img src = "./../../assets/logo.jpg">
+        <h1>Create Forum</h1>
+        <div class = "menu-toggle">
+            <input type = "checkbox" id = "checkbox">
+            <div class = "menu-stick"></div>
+            <div class = "menu-stick"></div>
+            <div class = "menu-stick"></div>
+        </div>
+        <div class = "navbar-content">
+            <ul style = "display : flex; flex-direction : column; gap : 1em;">
+                <li><a href = "../main.html">Home</a></li>
+                <li><a href = "./main.html">Confession</a></li>
+                <li><a href = "./chatbox.html">Chat Room</a></li>
+                <li><a href = "./customRoom.html">Custom Room</a></li>
+                <li><a href = "./about.html">About Creators</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class = "main-flex">
+    
+        <form id="mainForm">
+            <label for="title">Title :</label>
+            <input type="text" id="title" name="title" required>
+            <br><br>
+    
+            <label for="description">Description :</label>
+            <textarea id="description" name="description" rows="3" required></textarea>
+            
+            <div id="dynamicContent">
+                <div class="dynamicDiv">
+                    <label for="question">Question:</label>
+                    <input type="text" id="question" name="question" required>
+                    <br><br>
+    
+                    <label for="optionType">Select Option Type:</label>
+                    <select class="optionType" onchange="handleOptionTypeChange(this)">
+                        <option value="text">Text</option>
+                        <option value="poll">Poll</option>
+                    </select>
+                    <br>
+    
+                    <div class="optionContent">
+                        <!-- Content will be dynamically generated here -->
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Next Question Button placed outside the dynamic question divs -->
+            <br>
+            <button type="button" class="next-button" onclick="addNewQuestion()">Next Question</button>
+            
+            <br>
+            <button type="button" onclick="generateDiv()" class = "create-button">End</button>
+        </form>
+    </div>
+</body>
+
+<script>
+    function handleOptionTypeChange(selectElement) {
+        const optionContent = selectElement.parentElement.querySelector('.optionContent');
+        const optionType = selectElement.value;
+
+        // Clear previous content
+        optionContent.innerHTML = '';
+
+        if (optionType === 'text') {
+            // Add input for text
+            const textInput = document.createElement('input');
+            textInput.type = 'text';
+            textInput.placeholder = 'Enter text';
+            textInput.name = 'textOption';
+            textInput.required = true;
+            optionContent.appendChild(textInput);
+        } else if (optionType === 'poll') {
+            // Add inputs for poll options
+            const pollOptionsDiv = document.createElement('div');
+            pollOptionsDiv.className = 'poll-options';
+
+            const addPollOption = () => {
+                const pollInput = document.createElement('input');
+                pollInput.type = 'text';
+                pollInput.placeholder = 'Poll option';
+                pollInput.name = 'pollOption';
+                pollInput.required = true;
+                pollOptionsDiv.insertBefore(pollInput, pollOptionsDiv.querySelector('button'));
+            };
+
+            const addButton = document.createElement('button');
+            addButton.type = 'button';
+            addButton.textContent = 'Add Poll Option';
+            addButton.onclick = addPollOption;
+
+            pollOptionsDiv.appendChild(addButton);
+            optionContent.appendChild(pollOptionsDiv);
+            addPollOption(); // Add one poll option by default
+        }
+    }
+
+    function addNewQuestion() {
+        const newDiv = document.createElement('div');
+        newDiv.className = 'dynamicDiv';
+
+        const questionLabel = document.createElement('label');
+        questionLabel.textContent = 'Question:';
+        newDiv.appendChild(questionLabel);
+
+        const questionInput = document.createElement('input');
+        questionInput.type = 'text';
+        questionInput.name = 'question';
+        questionInput.required = true;
+        newDiv.appendChild(questionInput);
+
+        newDiv.appendChild(document.createElement('br'));
+        newDiv.appendChild(document.createElement('br'));
+
+        const selectLabel = document.createElement('label');
+        selectLabel.textContent = 'Select Option Type:';
+        newDiv.appendChild(selectLabel);
+
+        const selectElement = document.createElement('select');
+        selectElement.className = 'optionType';
+        selectElement.onchange = function () { handleOptionTypeChange(this); };
+
+        const textOption = document.createElement('option');
+        textOption.value = 'text';
+        textOption.textContent = 'Text';
+
+        const pollOption = document.createElement('option');
+        pollOption.value = 'poll';
+        pollOption.textContent = 'Poll';
+
+        selectElement.appendChild(textOption);
+        selectElement.appendChild(pollOption);
+        newDiv.appendChild(selectElement);
+
+        newDiv.appendChild(document.createElement('br'));
+        newDiv.appendChild(document.createElement('br'));
+
+        const optionContent = document.createElement('div');
+        optionContent.className = 'optionContent';
+        newDiv.appendChild(optionContent);
+
+        const dynamicContent = document.getElementById('dynamicContent');
+        dynamicContent.appendChild(newDiv); // Change to appendChild() instead of insertBefore()
+    }
+
+    function generateDiv() {
+        const title = document.getElementById('title').value;
+        const description = document.getElementById('description').value;
+
+        const dynamicDivs = document.querySelectorAll('.dynamicDiv');
+        const questions = [];
+
+        dynamicDivs.forEach(div => {
+            const questionText = div.querySelector('input[name="question"]')?.value;
+            const optionType = div.querySelector('.optionType').value;
+
+            if (optionType === 'text') {
+                const textOption = div.querySelector('input[name="textOption"]')?.value;
+                questions.push({
+                    type: 'text',
+                    question: questionText,
+                    answer: textOption
+                });
+            } else if (optionType === 'poll') {
+                const pollOptions = Array.from(div.querySelectorAll('input[name="pollOption"]')).map(input => input.value);
+                questions.push({
+                    type: 'poll',
+                    question: questionText,
+                    options: pollOptions
+                });
+            }
+        });
+
+        const formData = {
+            title: title,
+            description: description,
+            questions: questions
+        };
+
+        console.log(JSON.stringify(formData, null, 2));
+        alert('JSON object has been logged to the console.');
+    }
+</script>
+
+</html>
