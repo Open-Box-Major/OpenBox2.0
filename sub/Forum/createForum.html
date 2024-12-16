@@ -66,10 +66,17 @@
             color : black;
         }
 
-        .next-button, .create-button{
+        .next-button, .generate-forum{
             color : black;
             width : 90%;
             margin: 0 auto;
+            padding : .5em 2em;
+            background-color: #E5CFF7;
+            border : solid 2px #713ABE;
+            border-radius : 25px;
+        }
+
+        .add-poll{
             padding : .5em 2em;
             background-color: #E5CFF7;
             border : solid 2px #713ABE;
@@ -131,7 +138,7 @@
             <button type="button" class="next-button" onclick="addNewQuestion()">Next Question</button>
             
             <br>
-            <button type="button" class = "create-button">End</button>
+            <button type="button" class = "generate-forum">Create</button>
         </form>
     </div>
 </body>
@@ -170,6 +177,7 @@
             const addButton = document.createElement('button');
             addButton.type = 'button';
             addButton.textContent = 'Add Poll Option';
+            addButton.classList.add("add-poll");
             addButton.onclick = addPollOption;
 
             pollOptionsDiv.appendChild(addButton);
