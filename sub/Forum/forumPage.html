@@ -134,7 +134,7 @@
         const forumItems = document.querySelectorAll('.forum-item');
         forumItems.forEach(item => {
             const questionElement = item.querySelector('.question');
-            const questionText = questionElement ? questionElement.textContent : '';
+            const questionText = questionElement ? questionElement.textContent.split('. ')[1] : '';
             const type = item.querySelector('input') ? item.querySelector('input').type : null;
 
             if (type === 'text') {
@@ -205,7 +205,11 @@ function writeResponse(id, obj){
         let index = 0;
         if(data)
         index = parseInt(Object.keys(data).at(-1)) + 1;
-
+        
+        console.log("logs")
+        console.log(id);
+        console.log(index);
+        console.log(obj);
         if(obj){
             set(ref(database,`answers/${id}/${index}`, ), obj);
             console.log("response added")
