@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&family=Poppins:wght@200&display=swap" rel="stylesheet">
     <link rel = "stylesheet" href = "./forum.css">
     <link rel = "stylesheet" href = "./../style.css">
-    <script src = "forum.js" defer></script>
+    <script type = module src = "forum.js" defer></script>
     <script type = module src = "../main.js" defer></script>
 
     <style>
@@ -131,12 +131,13 @@
             <button type="button" class="next-button" onclick="addNewQuestion()">Next Question</button>
             
             <br>
-            <button type="button" onclick="generateDiv()" class = "create-button">End</button>
+            <button type="button" class = "create-button">End</button>
         </form>
     </div>
 </body>
 
 <script>
+    
     function handleOptionTypeChange(selectElement) {
         const optionContent = selectElement.parentElement.querySelector('.optionContent');
         const optionType = selectElement.value;
@@ -261,6 +262,8 @@
 
         console.log(JSON.stringify(formData, null, 2));
         alert('JSON object has been logged to the console.');
+
+        // writeNewPost(formData);
     }
 </script>
 
