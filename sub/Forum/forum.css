@@ -8,6 +8,8 @@
     justify-content: flex-start;
     align-items: center;
     gap : 2em;
+
+    overflow-y: scroll;
 }
 
 .create-button{
