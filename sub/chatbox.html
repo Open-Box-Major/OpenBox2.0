@@ -558,7 +558,7 @@ function checkProfanity(messageContent,currtime) {
       // Check if the API detected profanity
       if (!data.contains_profanity) {
         // If no profanity, proceed with adding the original message
-        addMessage(yourObject[key].name, yourObject[key].time);
+        // addMessage(yourObject[key].name, yourObject[key].time);
         saveMessages(messageContent,currtime);
         // console.log()
       } else {
