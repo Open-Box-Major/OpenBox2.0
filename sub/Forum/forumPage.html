@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main</title>
+    <link rel = "stylesheet" href = "style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&family=Poppins:wght@200&display=swap" rel="stylesheet">
+    <link rel = "stylesheet" href = "./forum.css">
+    <link rel = "stylesheet" href = "./../style.css">
+    <script type = module src = "forum.js" defer></script>
+    <script type = module src = "../main.js" defer></script>
+</head>
+<body>
+    <div class = "navbar">
+        <img src = "./../../assets/logo.jpg">
+        <h1>Forum</h1>
+        <div class = "menu-toggle">
+            <input type = "checkbox" id = "checkbox">
+            <div class = "menu-stick"></div>
+            <div class = "menu-stick"></div>
+            <div class = "menu-stick"></div>
+        </div>
+        <div class = "navbar-content">
+            <ul style = "display : flex; flex-direction : column; gap : 1em;">
+                <li><a href = "../main.html">Home</a></li>
+                <li><a href = "./main.html">Confession</a></li>
+                <li><a href = "./chatbox.html">Chat Room</a></li>
+                <li><a href = "./customRoom.html">Custom Room</a></li>
+                <li><a href = "./about.html">About Creators</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class = "main-flex">
+        <h2 class = "title">Title</h2>
+        <p class = "desc">desc</p>
+        <div class="forum-container" id="forumContainer"></div>
+        <button id="submitButton">Submit</button>
+    </div>
+</body>
+<script type = module>
+    const urlParams = new URLSearchParams(window.location.search);
+    const id = urlParams.get("id"); // Retrieve 'id' from query string
+    console.log("ID from query string:", id);
+
+    function generateForum(data) {
+        const forumContainer = document.querySelector('.main-flex .forum-container');
+        data.forEach((item, index) => {
+            const forumItem = document.createElement('div');
+            forumItem.classList.add('forum-item');
+            forumItem.setAttribute('data-index', index);  // Store the index for later reference
+            
+            const questionElement = document.createElement('div');
+            questionElement.classList.add('question');
+            questionElement.textContent = item.question;
+            forumItem.appendChild(questionElement);
+
+            if (item.type === 'text') {
+                const inputElement = document.createElement('input');
+                inputElement.type = 'text';
+                inputElement.placeholder = 'Your answer...';
+                inputElement.classList.add('forum-input');
+                forumItem.appendChild(inputElement);
+            } else if (item.type === 'poll') {
+                item.options.forEach(option => {
+                    const label = document.createElement('label');
+                    const radioButton = document.createElement('input');
+                    radioButton.type = 'radio';
+                    radioButton.name = `poll_${index}`;  // Unique name for each poll
+                    radioButton.value = option;
+                    label.appendChild(radioButton);
+                    label.appendChild(document.createTextNode(option));
+                    forumItem.appendChild(label);
+                    forumItem.appendChild(document.createElement('br')); // line break
+                });
+            }
+
+            forumContainer.appendChild(forumItem);
+        });
+    }
+
+    // Function to collect answers dynamically from the form
+    function collectResults() {
+        const results = {};
+
+        const forumItems = document.querySelectorAll('.forum-item');
+        forumItems.forEach(item => {
+            const questionElement = item.querySelector('.question');
+            const questionText = questionElement ? questionElement.textContent : '';
+            const type = item.querySelector('input') ? item.querySelector('input').type : null;
+
+            if (type === 'text') {
+                const inputElement = item.querySelector('.forum-input');
+                results[questionText] = inputElement ? inputElement.value : '';
+            } else if (type === 'radio') {
+                const selectedOption = item.querySelector('input[type="radio"]:checked');
+                results[questionText] = selectedOption ? selectedOption.value : null;
+            }
+        });
+
+        console.log('Collected Results:', results);
+        return results;
+    }
+
+    // Event listener for the submit button
+    document.getElementById('submitButton').addEventListener('click', () => {
+        const results = collectResults();
+        writeResponse(id, results);
+        alert("Thank you for your response");  // Display the collected results in a formatted way
+    });
+
+
+// -----------------------------DATABASE-----------------------------------
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.1/firebase-app.js";
+import { getDatabase, ref, set, get, child, onValue } from "https://www.gstatic.com/firebasejs/9.1.1/firebase-database.js";
+
+
+const firebaseConfig = {
+databaseURL: "https://openbox-forum-default-rtdb.asia-southeast1.firebasedatabase.app/",
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+
+// Initialize Realtime Database and get a reference to the service
+const database = getDatabase(app);
+
+
+function fetchForum(){
+    let keyRef = ref(database, "questions/" + id);
+    onValue(keyRef, (snapshot) =>{
+        let data = snapshot.val();
+        console.log(data);
+
+        const title = document.querySelector(".title");
+        title.innerHTML = data["title"];
+        const desc = document.querySelector(".desc");
+        desc.innerHTML = data["description"];
+
+        const questions = data["questions"];
+
+        console.log(JSON.stringify(questions))
+
+        generateForum(questions);
+    })
+}
+
+function writeResponse(id, obj){
+    let keyRef =  ref(database, "answers/" + id);
+    get(keyRef).then((snapshot) =>{
+        let data = snapshot.val();
+        let index = 0;
+        if(data)
+        index = parseInt(Object.keys(data).at(-1)) + 1;
+
+        if(obj){
+            set(ref(database,`answers/${id}/${index}`, ), obj);
+            console.log("response added")
+        }
+        
+        console.log(data)
+        console.log(id)
+    })
+}
+fetchForum();
+</script>
+</html>

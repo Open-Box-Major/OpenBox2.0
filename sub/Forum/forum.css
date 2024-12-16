@@ -1,0 +1,76 @@
+.main-flex{
+    padding-top : 12vh;
+    background-color: white;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap : 2em;
+}
+
+.create-button{
+    display: flex;
+    flex-direction: row;
+    width: 90vw;
+    padding : 3vw 2vw;
+
+    justify-content: center;
+    align-items: center;
+    gap : 1em;
+
+    background-color: #9D76C1;
+    color : white;
+    border-radius: 25px;
+    border : solid 2px #5B0888;
+
+}
+.create-button img{
+    height: 4vh;
+    aspect-ratio: 1/1;
+}
+
+.forum-card{
+    display: flex;
+    flex-direction: row;
+    width : 90%;
+    height: 10vh;
+    /* background-color: #9D76C1; */
+    border  : solid 2px #5B0888;
+    border-radius: 10px;
+    padding : 2.5%;
+    margin : 0 auto;
+}
+.forum-card > div:first-child{
+    width : 30%;
+    display: flex;
+    justify-content: center;
+    align-items : center;
+}
+.forum-card  :last-child{
+    width : 70%;
+    display : flex;
+    flex-direction : column;
+    justify-content: space-around;
+}
+.forum-card > div > h5{
+    width : fit-content;
+    padding : .2em 1em;
+    color : white;
+    border-radius : 20px;
+    background-color: #9D76C1;
+}
+.forum-card > div > p{
+    width : fit-content;
+    padding : .2em 1em;
+    color : white;
+    border-radius : 2px;
+    background-color: #9D76C1;
+    font-size : .8em;
+}
+.forum-card > div > img{
+    height : 7vh;
+    width : 7vh;
+    border-radius : 50%;
+}

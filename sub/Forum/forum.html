@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main</title>
+    <link rel = "stylesheet" href = "style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&family=Poppins:wght@200&display=swap" rel="stylesheet">
+    <link rel = "stylesheet" href = "./forum.css">
+    <link rel = "stylesheet" href = "./../style.css">
+    <script type = module src = "forum.js" defer></script>
+    <script type = module src = "../main.js" defer></script>
+</head>
+<body>
+    <div class = "navbar">
+        <img src = "./../../assets/logo.jpg">
+        <h1>Forum</h1>
+        <div class = "menu-toggle">
+            <input type = "checkbox" id = "checkbox">
+            <div class = "menu-stick"></div>
+            <div class = "menu-stick"></div>
+            <div class = "menu-stick"></div>
+        </div>
+        <div class = "navbar-content">
+            <ul style = "display : flex; flex-direction : column; gap : 1em;">
+                <li><a href = "../main.html">Home</a></li>
+                <li><a href = "./main.html">Confession</a></li>
+                <li><a href = "./chatbox.html">Chat Room</a></li>
+                <li><a href = "./customRoom.html">Custom Room</a></li>
+                <li><a href = "./about.html">About Creators</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class = "main-flex">
+        <div class = "create-button">
+            <h3>Create forum</h3>
+            <img src = "./../../assets/add.png">
+        </div>
+        <!-- <div class = "forum-card" id = "">
+            <div>
+                <img src = "https://www.cta.org/wp-content/uploads/2020/03/empty-classroom.jpg">
+            </div>
+            <div>
+                <h5>title</h5>
+                <p>description</p>
+            </div>
+        </div> -->
+    </div>
+</body>
+</html>
