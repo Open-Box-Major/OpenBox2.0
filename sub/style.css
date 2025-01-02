@@ -28,7 +28,7 @@ a{
 
 .navbar{
     height: 10vh;
-
+    z-index: 1;
     display : flex;
     flex-direction : row;
     align-items : center;
@@ -96,7 +96,6 @@ a{
     position : absolute;
     display : flex;
     flex-direction: column;
-
     height: 100vh;
     width : 50vw;
     background-color: var(--purple);

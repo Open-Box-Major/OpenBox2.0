@@ -262,6 +262,7 @@ input[type = "submit"]{
     border : solid 1px var(--dark-purple);
     border-radius : 30px;
     padding : .5em 2em;
+    cursor: pointer;
 }
 .other-options img{
     height: 90%;
